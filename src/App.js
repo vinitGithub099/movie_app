@@ -1,24 +1,47 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link,
+} from 'react-router-dom'
+import Home from './Components/Home';
+
+
+// http://www.omdbapi.com/?i=tt3896198&apikey=182921fd
+// 1559
 
 function App() {
+
+  const [data, setData] = useState({});
+  const [movie, setMovie] = useState('')
+
+  useEffect(() => {
+
+    axios.get(`http://www.omdbapi.com/?t=${movie}&apikey=182921fd`)
+      .then(response => response)
+      .then(result => {
+        setData(result)
+        console.log(result.data)
+      })
+      .catch(e => console.log("error msg: ", e))
+
+  }, [movie])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+      <Link to='/'></Link>
+      <Routes>
+        <Route exact path='/' element={<Home/>}></Route>
+      </Routes>
+
+      </BrowserRouter>
+
+    </>
   );
 }
 
