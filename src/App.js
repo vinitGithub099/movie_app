@@ -8,11 +8,11 @@ import {
   Routes,
   Link,
 } from 'react-router-dom'
-import Home from './Components/Home';
+import Home from './Components/Pages/Home';
 
 
 // http://www.omdbapi.com/?i=tt3896198&apikey=182921fd
-// 1559
+// 1559x
 
 function App() {
 
@@ -21,10 +21,11 @@ function App() {
 
   useEffect(() => {
 
-    axios.get(`http://www.omdbapi.com/?t=${movie}&apikey=182921fd`)
+    // axios.get(`http://www.omdbapi.com/?t=${movie}&apikey=182921fd`)
+    axios.get(`http://www.omdbapi.com/?t=Avengers&apikey=182921fd`)
       .then(response => response)
       .then(result => {
-        setData(result)
+        setData(result.data)
         console.log(result.data)
       })
       .catch(e => console.log("error msg: ", e))
@@ -36,7 +37,7 @@ function App() {
       <BrowserRouter>
       <Link to='/'></Link>
       <Routes>
-        <Route exact path='/' element={<Home/>}></Route>
+        <Route exact path='/' element={<Home data={data}/>}></Route>
       </Routes>
 
       </BrowserRouter>
