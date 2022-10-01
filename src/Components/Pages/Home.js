@@ -1,15 +1,15 @@
 import React from "react";
 import Navigation from './Navigation';
 import Search from './Search';
-import MovieCard from "./MovieCard";
+import MovieList from "./MovieList";
 
 const Home = (props) => {
     return (
         <>
             <Navigation></Navigation>
             {/* <h2>Home Page</h2> */}
-            <Search></Search>
-            <MovieCard movieData={props.data}></MovieCard>
+            <Search setMovie={props.setMovie}></Search>
+            <MovieList movieData={props.data} page={props.page} setPage={props.setPage}></MovieList>
         </>
     )
 }

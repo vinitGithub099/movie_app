@@ -1,14 +1,15 @@
 import React from "react";
 import SearchStyles from '../JSS/Search_jss'
 
-const Search = () => {
+const Search = (props) => {
     const handleSearchSubmit = (event) => {
         event.preventDefault()
         const searchFormData = new FormData(event.target)
         console.log("search result: ",searchFormData)
         // console.log(searchFormData.entries())
         for (let x of searchFormData.entries()) {
-            console.log(x)
+            // console.log(x)
+            props.setMovie(x[1])
         }
 
     }
